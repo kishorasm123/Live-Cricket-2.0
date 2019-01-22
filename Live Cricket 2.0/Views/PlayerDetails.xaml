@@ -1,0 +1,201 @@
+﻿<UserControl x:Class="Live_Cricket_2._0.Views.PlayerDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Live_Cricket_2._0.Views"
+             mc:Ignorable="d" 
+             d:DesignHeight="700" d:DesignWidth="400"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local1="clr-namespace:Live_Cricket_2._0.ViewModels">
+
+    <ScrollViewer >
+        
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".3*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+                <RowDefinition Height=".1*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width=".5*" ></ColumnDefinition>
+                <ColumnDefinition Width=".5*" ></ColumnDefinition>
+            </Grid.ColumnDefinitions>
+
+            <Image Grid.Row="0" Grid.Column="0" Source="{Binding objSelectedPlayerForUC.Image}" Grid.ColumnSpan="2" Width="110" Height="100" Stretch="UniformToFill"></Image>
+
+            <TextBlock Grid.Row="1" Grid.Column="0" Text="Name : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14" ></TextBlock>
+            <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.Name}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="2" Grid.Column="0" Text="Matches : "  VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtTotalMatches, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtTotalMatches, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtTotalMatches" Grid.Row="2" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.TotalMatches}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"> </TextBlock>
+
+            <TextBlock Grid.Row="3" Grid.Column="0" Text="Runs : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtTotalRuns, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtTotalRuns, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtTotalRuns" Grid.Row="3" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.TotalRuns}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="4" Grid.Column="0" Text="Average : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtAverge, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtAverge, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtAverge" Grid.Row="4" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.Average}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="5" Grid.Column="0" Text="StrikeRate : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtStrikeRate, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtStrikeRate, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtStrikeRate" Grid.Row="5" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.StrikeRate}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="High Score : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtHighScore, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtHighScore, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtHighScore" Grid.Row="6" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.HighScore}" Style="{DynamicResource CollapsableTextblock}"  VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="6" Grid.Column="0" Text="Economy : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtEconomy, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtEconomy, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtEconomy" Grid.Row="6" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.Economy}" Style="{DynamicResource CollapsableTextblock}"  VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="Hundreds : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtHundreds, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtHundreds, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtHundreds" Grid.Row="7" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.Hundreds}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="7" Grid.Column="0" Text="BBM : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtBBM, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtBBM, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtBBM" Grid.Row="7" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.BBM}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="Fifties : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtFifties, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtFifties, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtFifties" Grid.Row="8" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.Fifties}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+            <TextBlock Grid.Row="8" Grid.Column="0" Text="5W : " VerticalAlignment="Center" HorizontalAlignment="Right" FontSize="14">
+                <TextBlock.Style>
+                    <Style>
+                        <Style.Triggers>
+                            <DataTrigger Binding="{Binding ElementName=txtFiveWickets, Path=Visibility}" Value="Visible">
+                                <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                            </DataTrigger>
+                            <DataTrigger Binding="{Binding ElementName=txtFiveWickets, Path=Visibility}" Value="Hidden">
+                                <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                            </DataTrigger>
+                        </Style.Triggers>
+                    </Style>
+                </TextBlock.Style>
+            </TextBlock>
+            <TextBlock x:Name="txtFiveWickets" Grid.Row="8" Grid.Column="1" Text="{Binding objSelectedPlayerForUC.FiveWickets}" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Center" FontSize="14"></TextBlock>
+
+        </Grid>
+    </ScrollViewer>
+
+
+</UserControl>

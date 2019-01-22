@@ -1,0 +1,136 @@
+﻿<controls:MetroWindow x:Class="Live_Cricket_2._0.DashBoard"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Live_Cricket_2._0"             
+        xmlns:local1="clr-namespace:Live_Cricket_2._0.ViewModels"
+        xmlns:local2="clr-namespace:Live_Cricket_2._0.Views"
+        xmlns:local3="clr-namespace:Live_Cricket_2._0.Converters"
+        xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+        xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"              
+        RightWindowCommandsOverlayBehavior="HiddenTitleBar"
+        mc:Ignorable="d"
+        Title="Cricket" Height="275" Width="500" MouseDown="Window_MouseDown"
+        TitleCaps="False"  TitlebarHeight="30" NonActiveWindowTitleBrush="{DynamicResource AccentColorBrush}" NonActiveGlowBrush="{DynamicResource AccentColorBrush}" GlowBrush="{DynamicResource AccentColorBrush}" ShowMaxRestoreButton="False" Icon="/Live Cricket 2.0;component/Resources/imgCricket.png" ResizeMode="CanMinimize" >
+
+    <Window.Resources>
+        <local3:VisibilityConverter x:Key="VisibilityConverter" />
+        <local3:InverseVisibilityConverter x:Key="InverseVisibilityConverter" />
+    </Window.Resources>
+
+    <controls:MetroWindow.Flyouts>
+        <controls:FlyoutsControl>
+            <controls:Flyout Position="Right" x:Name="mainFlyout" Header="{Binding objMatchDetailsForUI.MatchCarrier}" AreAnimationsEnabled="True" IsPinned="False" IsOpen="{Binding IsEnableFlyOut}"  BorderBrush="{DynamicResource AccentColorBrush}" BorderThickness="1" Theme="Adapt"  >
+                <Grid Width="250" DockPanel.Dock="Right" >
+                    <ContentControl Content="{Binding objPlayerDetailsUI}" Background="{DynamicResource AccentColorBrush}" ></ContentControl>
+                </Grid>
+            </controls:Flyout>
+        </controls:FlyoutsControl>
+    </controls:MetroWindow.Flyouts>
+
+    <!--Applying transparent icon to present in window-->
+    <controls:MetroWindow.IconTemplate>
+        <DataTemplate>
+            <Image Source="/Live Cricket 2.0;component/Resources/icoCricketLogo.ico"></Image>
+        </DataTemplate>
+    </controls:MetroWindow.IconTemplate>
+
+    <!--Proving icons on the title window-->
+    <controls:MetroWindow.RightWindowCommands>
+        <controls:WindowCommands>
+            <ComboBox x:Name="ColorsSelector"
+                              Margin="2 0 0 0"
+                              VerticalAlignment="Center"
+                              SelectionChanged="ColorsSelectorOnSelectionChanged" SelectedIndex="{Binding intSelectedColorIndex}"
+                              IsEditable="False"
+                      ItemsSource="{Binding Colors}">
+                <ComboBox.ItemTemplate>
+                    <DataTemplate>
+                        <TextBlock Text="{Binding Key}" />
+                    </DataTemplate>
+                </ComboBox.ItemTemplate>
+            </ComboBox>
+            <!--<Button FontFamily="Wingdings" FontSize="20" >J
+                <Button.ToolTip>
+                    <TextBlock Text="Feedback"></TextBlock>
+                </Button.ToolTip>
+            </Button>-->
+
+            <Button Command="{Binding cmdAutoHide}" Style="{StaticResource FlatButtonStyle}">
+                <Button.Template>
+                    <ControlTemplate>
+                        <Image Source="{Binding StrAutoHidePath}" Height="20"></Image>
+                    </ControlTemplate>
+                </Button.Template>
+                
+                <Button.ToolTip>
+                    <TextBlock Text="Auto Hide"></TextBlock>
+                </Button.ToolTip>
+            </Button>
+
+        </controls:WindowCommands>
+    </controls:MetroWindow.RightWindowCommands>
+
+    <Grid>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <!--<RowDefinition Height=".2*"></RowDefinition>-->
+        </Grid.RowDefinitions>
+
+        <!--<ContentControl Visibility="Visible"  Content="{Binding objStartUpMessaage ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource AccentColorBrush}" ></ContentControl>-->
+
+        <ContentControl Visibility="{Binding isShowStartUpMessage, Converter={StaticResource VisibilityConverter} }" Content="{Binding objStartUpMessaage ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource AccentColorBrush}" ></ContentControl>
+
+        <controls:MetroAnimatedTabControl  Visibility="{Binding isShowStartUpMessage, Converter={StaticResource InverseVisibilityConverter} }" >
+            <controls:MetroTabItem Header="Matches">
+                <Grid>
+
+                    <ListBox ItemsSource ="{Binding objCollOfMatchDetails}" SelectedItem="{Binding objSelectedMatchItem}" ScrollViewer.VerticalScrollBarVisibility="Hidden" >
+                        <ListBox.ItemTemplate>
+                            <DataTemplate>
+                                <StackPanel Orientation="Horizontal" >
+                                    <!--<controls:ToggleSwitch OnLabel="" OffLabel="" IsChecked="True"  Style="{DynamicResource Custom.ToggleSwitch.Win10}" > </controls:ToggleSwitch>-->
+                                    <TextBlock Text="{Binding objMatchName}" FontSize="14" VerticalAlignment="Center">
+                                       
+                                        <!--<TextBlock.InputBindings>
+                                            <MouseBinding Command="{Binding objSelectedMatch}"  MouseAction="LeftClick" />
+                                        </TextBlock.InputBindings>-->
+
+
+                                    </TextBlock>
+                                </StackPanel>
+
+                            </DataTemplate>
+                        </ListBox.ItemTemplate>
+
+                        <!--<i:Interaction.Triggers>
+                            <i:EventTrigger EventName="MouseLeftButtonDown" >
+                                <i:InvokeCommandAction Command="{Binding objSelectedMatch,Mode=TwoWay,UpdateSourceTrigger=PropertyChanged}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>-->
+
+                        <i:Interaction.Triggers>
+                            <!--<i:EventTrigger EventName="SelectionChanged" >-->
+                            <i:EventTrigger EventName="SelectionChanged" >
+                                <i:InvokeCommandAction Command="{Binding objSelectedMatch}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+
+                    </ListBox>
+
+                </Grid>
+            </controls:MetroTabItem>
+
+            <controls:MetroTabItem Header="{Binding objMatchDetailsForUI.TeamNames}"  x:Name="tabItemScoreDetails" IsSelected="{Binding isMatchSelected}">
+                <Grid Width="Auto" DockPanel.Dock="Right">
+                    <ContentControl Content="{Binding objScoreDetailsUI ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource AccentColorBrush}" ></ContentControl>
+                </Grid>
+                              
+            </controls:MetroTabItem>
+        </controls:MetroAnimatedTabControl>
+
+    </Grid>
+
+</controls:MetroWindow>

@@ -1,0 +1,264 @@
+﻿<UserControl x:Class="Live_Cricket_2._0.Views.ScoreDetails"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Live_Cricket_2._0.Views"
+             xmlns:controls="http://metro.mahapps.com/winfx/xaml/controls"
+             xmlns:local1="clr-namespace:Live_Cricket_2._0.ViewModels"
+             xmlns:local2="clr-namespace:Live_Cricket_2._0.Converters"
+             xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"  
+             mc:Ignorable="d" 
+             d:DesignHeight="300" d:DesignWidth="300">
+
+    <UserControl.Resources>
+        <local2:ValueConverter x:Key="NullValueConverter" />
+    </UserControl.Resources>
+
+
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="1*"></ColumnDefinition>
+            <ColumnDefinition Width="0.55*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+
+        <Grid.RowDefinitions>
+            <RowDefinition Height="1*"></RowDefinition>
+            <RowDefinition Height=".2*"></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Grid Grid.Column="0" Grid.Row="0" >
+
+            <Grid.RowDefinitions>
+                <RowDefinition Height=".8*"></RowDefinition>
+                <RowDefinition Height="0.75*"></RowDefinition>
+                <RowDefinition Height="0.75*"></RowDefinition>
+                <RowDefinition Height="0.75*"></RowDefinition>
+                <RowDefinition Height="0.75*"></RowDefinition>
+                <RowDefinition Height="0.70*"></RowDefinition>
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="0" VerticalAlignment="Center">
+                <TextBlock x:Name="txtScore" Grid.Column="0" Grid.Row="0"  Margin="5,0,0,0" FontSize ="17" Style="{DynamicResource CollapsableTextblock}" VerticalAlignment="Top" Foreground="{DynamicResource AccentColorBrush}">
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} {1}">
+                            <Binding Path= "objMatchDetailsForUI.BattingTeam" />
+                            <Binding Path= "objMatchDetailsForUI.TeamScore" />
+                            <!--<Binding Path= "objMatchDetailsForUI.RunRate"/>-->
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <controls:ProgressRing Width="20" Height="20" VerticalAlignment="Center" Margin="5,0,0,0" HorizontalAlignment="Right" >
+                    <controls:ProgressRing.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </controls:ProgressRing.Style>
+                </controls:ProgressRing>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="1" VerticalAlignment="Center" >
+                <TextBlock FontSize ="15"  Margin="5,0,0,0">
+
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding objSelectedPlayer}" MouseAction="LeftClick" CommandParameter="Batsman1" />
+                    </TextBlock.InputBindings>
+
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1} ({2})">
+                            <Binding Path= "objMatchDetailsForUI.Batsman1.Name" />
+                            <Binding Path= "objMatchDetailsForUI.Batsman1.Runs"/>
+                            <Binding Path= "objMatchDetailsForUI.Batsman1.Balls" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <TextBlock FontSize="13.5"  Margin="5,0,0,0" Opacity="0.5" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{} [{0} × 4s , ">
+                            <Binding Path= "objMatchDetailsForUI.Batsman1.Fours" />
+
+                        </MultiBinding>
+                    </TextBlock.Text>
+
+                    <TextBlock.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBlock FontSize="13.5" IsEnabled="False" Opacity="0.5" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} × 6s]">
+                            <Binding Path= "objMatchDetailsForUI.Batsman1.Sixes" />
+
+                        </MultiBinding>
+                    </TextBlock.Text>
+
+                    <TextBlock.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="2" VerticalAlignment="Center">
+                <TextBlock FontSize ="15"  Margin="5,0,0,0">
+
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding objSelectedPlayer}" MouseAction="LeftClick" CommandParameter="Batsman2" />
+                    </TextBlock.InputBindings>
+
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - {1} ({2})">
+                            <Binding Path= "objMatchDetailsForUI.Batsman2.Name" />
+                            <Binding Path= "objMatchDetailsForUI.Batsman2.Runs"/>
+                            <Binding Path= "objMatchDetailsForUI.Batsman2.Balls" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <TextBlock FontSize="13.5" Margin="5,0,0,0" Opacity="0.5" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{} [{0} × 4s , ">
+                            <Binding Path= "objMatchDetailsForUI.Batsman2.Fours" />
+
+                        </MultiBinding>
+                    </TextBlock.Text>
+
+                    <TextBlock.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+                <TextBlock FontSize="13.5" Opacity="0.5" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} × 6s]">
+                            <Binding Path= "objMatchDetailsForUI.Batsman2.Sixes" />
+
+                        </MultiBinding>
+                    </TextBlock.Text>
+
+                    <TextBlock.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+            </StackPanel>
+
+            <StackPanel Orientation="Horizontal" Grid.Column="0" Grid.Row="3" VerticalAlignment="Center">
+                <TextBlock  Margin="5,0,0,0" FontSize ="15">
+
+                    <TextBlock.InputBindings>
+                        <MouseBinding Command="{Binding objSelectedPlayer}" MouseAction="LeftClick" CommandParameter="Bowler" />
+                    </TextBlock.InputBindings>
+
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat="{}{0} - ({1}/{2})">
+                            <Binding Path= "objMatchDetailsForUI.Bowler.Name" />
+                            <Binding Path= "objMatchDetailsForUI.Bowler.Wickets"/>
+                            <Binding Path= "objMatchDetailsForUI.Bowler.Runs" />
+                            <!--<Binding Path= "objMatchDetailsForUI.Bowler.Overs" />-->
+                        </MultiBinding>
+                    </TextBlock.Text>
+                </TextBlock>
+
+                <TextBlock FontSize="13.5" Opacity="0.5" Margin="5,0,0,0" >
+                    <TextBlock.Text>
+                        <MultiBinding StringFormat=" {0} Ovs">
+                            <Binding Path= "objMatchDetailsForUI.Bowler.Overs" />
+                        </MultiBinding>
+                    </TextBlock.Text>
+
+                    <TextBlock.Style>
+                        <Style>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Visible">
+                                    <Setter Property="TextBlock.Visibility" Value="Visible"/>
+                                </DataTrigger>
+                                <DataTrigger Binding="{Binding ElementName=txtRunRate, Path=Visibility}" Value="Hidden">
+                                    <Setter Property="TextBlock.Visibility" Value="Hidden"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBlock.Style>
+                </TextBlock>
+
+            </StackPanel>
+
+            <TextBlock x:Name="txtRecent" Grid.Column="0" Grid.Row="4" Margin="5,0,0,0" FontSize ="13" VerticalAlignment="Center" Text="{Binding objMatchDetailsForUI.Recent, Converter={StaticResource NullValueConverter} }" ></TextBlock>
+
+            <TextBlock Grid.Column="0" Grid.Row="5" Margin="5,0,0,0" FontSize="15" VerticalAlignment="Center" Text="{Binding objMatchDetailsForUI.ManOfMatch}" Foreground="{DynamicResource AccentColorBrush}" FontWeight="SemiBold" ></TextBlock>
+
+        </Grid>
+
+        <Grid Grid.Column="1" Grid.Row="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="1*"></RowDefinition>
+                <RowDefinition Height="0.2*"></RowDefinition>
+
+            </Grid.RowDefinitions>
+
+            <StackPanel Orientation="Vertical" Grid.Column="1" Grid.Row="0">
+                <TextBlock x:Name="txtRunRate" Text="{Binding objMatchDetailsForUI.RunRate}" Style="{DynamicResource CollapsableTextblock}" Margin="5,0,0,0" FontSize ="16" VerticalAlignment="Top" Foreground="{DynamicResource AccentColorBrush}"></TextBlock>
+                <TextBlock x:Name="txtPartnerShip" Text="{Binding objMatchDetailsForUI.Patnership}" Style="{DynamicResource CollapsableTextblock}" Margin="5,7,0,0" FontSize ="16" VerticalAlignment="Top" ></TextBlock>
+                <TextBlock x:Name="LastWK" Text="{Binding objMatchDetailsForUI.LastWicket}" Style="{DynamicResource CollapsableTextblock}" Margin="5,7,0,0" FontSize ="12" VerticalAlignment="Bottom" ></TextBlock>
+
+            </StackPanel>
+
+
+
+            <!--<controls:ProgressRing Width="30" Height="30" VerticalAlignment="Top" HorizontalAlignment="Right" ></controls:ProgressRing>-->
+            <controls:ToggleSwitch Grid.Row="1" IsChecked="{Binding isNotificationOn}" OnLabel="Notification On" OffLabel="Notification Off" Style="{DynamicResource Custom.ToggleSwitch.Win10}" ></controls:ToggleSwitch>
+
+        </Grid>
+
+        <StatusBar Grid.Row="3" Grid.ColumnSpan="2" Margin="2" >
+            <StatusBarItem Content="{Binding objMatchDetailsForUI.Status}" FontWeight="SemiBold" ></StatusBarItem>
+        </StatusBar>
+
+
+    </Grid>
+
+</UserControl>
