@@ -28,22 +28,6 @@ namespace Live_Cricket_2._0
             this.DataContext = new ViewModels.Dashboard_VM(this);
         }
 
-        private void ColorsSelectorOnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var selectedColor = this.ColorsSelector.SelectedItem as KeyValuePair<string, Color>?;
-            if (selectedColor.HasValue)
-            {
-                var theme = MahApps.Metro.ThemeManager.DetectAppStyle(Application.Current);
-                MahAppsMetroThemesSample.ThemeManagerHelper.CreateAppStyleBy(selectedColor.Value.Value, true);
-
-                //Saving color to settings variable
-                Properties.Settings.Default.intSelectedColorIndex = this.ColorsSelector.SelectedIndex;
-                Properties.Settings.Default.Save();
-                //Saving color to settings variable
-            }
-            Application.Current.MainWindow.Activate();
-        }
-
         private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
             if (e.ChangedButton == MouseButton.Left)
@@ -52,6 +36,6 @@ namespace Live_Cricket_2._0
             }
         }
 
-       
+
     }
 }

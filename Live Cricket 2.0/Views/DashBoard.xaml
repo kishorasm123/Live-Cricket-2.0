@@ -42,12 +42,16 @@
             <ComboBox x:Name="ColorsSelector"
                               Margin="2 0 0 0"
                               VerticalAlignment="Center"
-                              SelectionChanged="ColorsSelectorOnSelectionChanged" SelectedIndex="{Binding intSelectedColorIndex}"
+                              SelectedIndex="{Binding intSelectedColorIndex}"
                               IsEditable="False"
-                      ItemsSource="{Binding Colors}">
+                              ItemsSource="{Binding Colors}">
                 <ComboBox.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Key}" />
+                        <StackPanel Orientation="Horizontal">
+                            <Ellipse Width="12.5" Height="12.5" Fill="{Binding Key}"></Ellipse>
+                            <TextBlock Width="7.5"> </TextBlock>
+                            <TextBlock Text="{Binding Key}" />
+                        </StackPanel>
                     </DataTemplate>
                 </ComboBox.ItemTemplate>
             </ComboBox>
@@ -63,7 +67,7 @@
                         <Image Source="{Binding StrAutoHidePath}" Height="20"></Image>
                     </ControlTemplate>
                 </Button.Template>
-                
+
                 <Button.ToolTip>
                     <TextBlock Text="Auto Hide"></TextBlock>
                 </Button.ToolTip>
@@ -127,7 +131,7 @@
                 <Grid Width="Auto" DockPanel.Dock="Right">
                     <ContentControl Content="{Binding objScoreDetailsUI ,Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" Background="{DynamicResource AccentColorBrush}" ></ContentControl>
                 </Grid>
-                              
+
             </controls:MetroTabItem>
         </controls:MetroAnimatedTabControl>
 
